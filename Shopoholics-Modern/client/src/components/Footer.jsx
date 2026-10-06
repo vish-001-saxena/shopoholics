@@ -1,0 +1,1 @@
+export default function Footer(){return <footer><div><strong>shopoholics</strong><p>Thoughtful products. Simple shopping. Built with the MERN stack.</p></div><span>© {new Date().getFullYear()} Shopoholics</span></footer>}

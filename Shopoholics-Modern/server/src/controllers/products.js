@@ -1,0 +1,4 @@
+import Product from '../models/Product.js';
+export async function list(req,res){try{const {category='all',q='',featured}=req.query;const filter={};if(category!=='all')filter.category=category;if(q)filter.$or=[{title:{$regex:q,$options:'i'}},{description:{$regex:q,$options:'i'}}];if(featured==='true')filter.featured=true;const products=await Product.find(filter).sort({createdAt:-1});res.json({success:true,products})}catch(e){res.status(500).json({success:false,message:e.message})}}
+export async function get(req,res){try{const product=await Product.findById(req.params.id);if(!product)return res.status(404).json({success:false,message:'Product not found.'});res.json({success:true,product})}catch{res.status(400).json({success:false,message:'Invalid product id.'})}}
+export async function categories(req,res){const categories=await Product.distinct('category');res.json({success:true,categories})}

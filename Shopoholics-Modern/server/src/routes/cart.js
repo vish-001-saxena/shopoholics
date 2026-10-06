@@ -1,0 +1,1 @@
+import {Router} from 'express'; import {auth} from '../middleware/auth.js'; import {getCart,add,update,remove,checkout,clear} from '../controllers/cart.js'; const r=Router();r.use(auth);r.get('/',getCart);r.post('/items',add);r.patch('/items/:productId',update);r.delete('/items/:productId',remove);r.post('/checkout',checkout);r.delete('/',clear);export default r;
