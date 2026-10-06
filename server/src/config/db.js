@@ -1,7 +1,16 @@
+import dns from 'dns';
 import mongoose from 'mongoose';
-export async function connectDB() {
+
+dns.setServers(['8.8.8.8', '1.1.1.1']);
+
+export const connectDB = async () => {
   const uri = process.env.MONGO_URI;
-  if (!uri) throw new Error('MONGO_URI is missing. Add it to server/.env');
+
+  if (!uri) {
+    throw new Error('MONGO_URI is not defined');
+  }
+
   await mongoose.connect(uri);
+
   console.log('✓ MongoDB connected');
-}
+};
